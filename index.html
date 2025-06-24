@@ -3,8 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tiniy - Photo Compression for iOS</title>
+    <title>Tyniy - Professional Photo Compression</title>
     <style>
+        :root {
+            --background: #1A1C20;
+            --card-background: #2A2D33;
+            --primary-text: #FFFFFF;
+            --secondary-text: #A0A0A0;
+            --accent-blue: #00AEEF;
+            --accent-orange: #FF8C42;
+            --blue-glow: rgba(0, 174, 239, 0.15);
+            --orange-glow: rgba(255, 140, 66, 0.15);
+            --border-radius: 12px;
+            --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -12,247 +25,298 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: var(--font-family);
+            background-color: var(--background);
+            color: var(--primary-text);
             line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 2rem;
         }
 
-        header {
-            padding: 2rem 0;
+        .header {
             text-align: center;
+            padding: 4rem 0;
+        }
+
+        .app-icon {
+            width: 80px;
+            height: 80px;
+            background: #222;
+            border-radius: 22.5%;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            /* Placeholder for a real icon */
+            background: linear-gradient(45deg, var(--accent-blue), var(--accent-orange));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            font-weight: bold;
             color: white;
         }
 
-        .logo {
-            font-size: 3rem;
+        .app-icon-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 22.5%;
+            margin-bottom: 1.5rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
-            letter-spacing: -2px;
         }
 
-        .tagline {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            font-weight: 300;
+        .header p {
+            font-size: 1.25rem;
+            color: var(--secondary-text);
         }
 
-        main {
-            background: white;
-            margin: 2rem auto;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            overflow: hidden;
-            max-width: 800px;
+        .card {
+            background-color: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
         }
 
-        .hero {
-            padding: 3rem 2rem;
-            text-align: center;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-        }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: #2c3e50;
-        }
-
-        .hero p {
-            font-size: 1.1rem;
-            color: #5a6c7d;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .content {
-            padding: 3rem 2rem;
-        }
-
-        .section {
-            margin-bottom: 3rem;
-        }
-
-        .section h2 {
+        .section-title {
             font-size: 1.8rem;
-            margin-bottom: 1rem;
-            color: #2c3e50;
-            border-bottom: 2px solid #667eea;
-            padding-bottom: 0.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-align: center;
         }
 
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+        .comparison-slider {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: var(--border-radius);
+        }
+
+        .comparison-slider img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .comparison-slider .after-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+        }
+
+        .comparison-slider .slider-handle {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 4px;
+            height: 100%;
+            background: white;
+            cursor: ew-resize;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .comparison-slider .slider-handle::after {
+            content: '↔';
+            position: absolute;
+            background: white;
+            color: black;
+            padding: 5px;
+            border-radius: 50%;
+            font-size: 18px;
+            line-height: 1;
+        }
+
+        .slider-input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            opacity: 0;
+            cursor: ew-resize;
+        }
+
+        .compression-summary {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
             margin-top: 2rem;
         }
 
-        .feature {
-            padding: 1.5rem;
-            background: #f8f9fa;
-            border-radius: 10px;
-            border-left: 4px solid #667eea;
+        .summary-item h3 {
+            font-size: 2rem;
+            color: var(--accent-blue);
+        }
+        .summary-item p {
+            color: var(--secondary-text);
+        }
+        .summary-item .highlight {
+             color: var(--accent-orange);
+             font-weight: 600;
         }
 
-        .feature h3 {
-            color: #2c3e50;
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature-item {
+            background-color: var(--background);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-blue);
+        }
+
+        .feature-item h3 {
+            font-size: 1.2rem;
             margin-bottom: 0.5rem;
         }
 
-        .feature p {
-            color: #5a6c7d;
+        .feature-item p {
+            color: var(--secondary-text);
             font-size: 0.95rem;
         }
 
-        .contact {
-            background: #667eea;
-            color: white;
-            padding: 2rem;
-            text-align: center;
-            border-radius: 10px;
-        }
-
-        .contact h2 {
-            border: none;
-            color: white;
-            margin-bottom: 1rem;
-        }
-
-        .contact a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            border-bottom: 1px solid rgba(255,255,255,0.3);
-            transition: border-color 0.3s ease;
-        }
-
-        .contact a:hover {
-            border-bottom-color: white;
-        }
-
-        footer {
+        .cta-section {
             text-align: center;
             padding: 2rem 0;
-            color: white;
-            opacity: 0.8;
         }
 
-        footer a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        .app-badge {
+        .app-store-badge {
             display: inline-block;
-            margin-top: 2rem;
-            padding: 1rem 2rem;
-            background: #000;
-            color: white;
+            height: 57px; /* Standard height for App Store badges */
+            margin-top: 1rem;
+        }
+        .app-store-badge img {
+            height: 100%;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: var(--secondary-text);
+            font-size: 0.9rem;
+        }
+
+        .footer a {
+            color: var(--secondary-text);
             text-decoration: none;
-            border-radius: 10px;
-            font-weight: 500;
-            transition: transform 0.3s ease;
         }
-
-        .app-badge:hover {
-            transform: translateY(-2px);
-        }
-
-        @media (max-width: 768px) {
-            .logo {
-                font-size: 2.5rem;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .content {
-                padding: 2rem 1.5rem;
-            }
-
-            .features {
-                grid-template-columns: 1fr;
-            }
+        .footer a:hover {
+            color: var(--primary-text);
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="logo">Tiniy</div>
-            <div class="tagline">Professional Photo Compression for iOS</div>
-        </div>
-    </header>
 
-    <main>
-        <section class="hero">
-            <h1>Compress. Optimize. Export.</h1>
-            <p>The simple, intuitive iOS app that lets photographers reduce file sizes without sacrificing image quality. Perfect for mirrorless and DSLR photographers on the go.</p>
-            <a href="#" class="app-badge">📱 Available on App Store</a>
-        </section>
+    <div class="container">
+        <header class="header">
+            <div class="app-icon">T</div>
+            <h1>Tyniy</h1>
+            <p>Professional Photo Compression</p>
+        </header>
 
-        <div class="content">
-            <section class="section">
-                <h2>What is Tiniy?</h2>
-                <p>Tiniy is a simple, intuitive iOS app designed specifically for photographers who need to optimize their images without compromising quality. Import large JPEG images directly from an SD‑card reader, apply near‑lossless compression with optional downscaling, and export optimized files—all without needing a desktop computer.</p>
-            </section>
-
-            <section class="section">
-                <h2>Key Features</h2>
-                <div class="features">
-                    <div class="feature">
-                        <h3>🔌 Direct SD Card Import</h3>
-                        <p>Import large JPEG images directly from your SD‑card reader to your iOS device.</p>
+        <main>
+            <section class="card">
+                <h2 class="section-title">See the Quality Preservation</h2>
+                <div class="comparison-slider" id="comparison-container">
+                    <img src="PuffinXXL.jpeg" alt="Original Uncompressed Image" class="before-image">
+                    <img src="PuffinS.jpeg" alt="Compressed Image" class="after-image">
+                    <div class="slider-handle"></div>
+                    <input type="range" min="0" max="100" value="50" class="slider-input" aria-label="Image comparison slider">
+                </div>
+                <div class="compression-summary">
+                    <div class="summary-item">
+                        <h3>92%</h3>
+                        <p>Average Size Reduction</p>
                     </div>
-                    <div class="feature">
-                        <h3>🗜️ Near-Lossless Compression</h3>
-                        <p>Advanced compression algorithms that maintain image quality while significantly reducing file sizes.</p>
-                    </div>
-                    <div class="feature">
-                        <h3>📏 Optional Downscaling</h3>
-                        <p>Resize images to your preferred dimensions while maintaining aspect ratio and quality.</p>
-                    </div>
-                    <div class="feature">
-                        <h3>📤 Easy Export</h3>
-                        <p>Export optimized files directly from your device to share or store as needed.</p>
+                     <div class="summary-item">
+                        <p>Original: <span class="highlight">7.2 MB</span></p>
+                         <p>Compressed: <span class="highlight">511 KB</span></p>
                     </div>
                 </div>
             </section>
 
-            <section class="section">
-                <h2>Perfect For</h2>
-                <p>Tiniy is designed for mirrorless and DSLR photographers who are always on the move. Whether you're traveling, shooting events, or working in the field, Tiniy helps you manage your photo storage efficiently without the need for a desktop computer or complex software.</p>
+            <section class="card">
+                <h2 class="section-title">Core Features</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">💾</div>
+                        <h3>Direct Import</h3>
+                        <p>Import from SD cards, external drives, and your iCloud Photos library.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">✨</div>
+                        <h3>Powerful Compression</h3>
+                        <p>Advanced algorithms reduce file size dramatically with minimal quality loss.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🚀</div>
+                        <h3>Blazing Fast</h3>
+                        <p>Optimized for speed to fit into a professional photographer's workflow.</p>
+                    </div>
+                     <div class="feature-item">
+                        <div class="feature-icon">📱</div>
+                        <h3>iOS Native</h3>
+                        <p>Designed from the ground up for a seamless experience on iPhone & iPad.</p>
+                    </div>
+                </div>
             </section>
 
-            <section class="contact">
-                <h2>Get in Touch</h2>
-                <p>Have questions or need support? We'd love to hear from you.</p>
-                <p style="margin-top: 1rem;">
-                    <strong>Email:</strong> <a href="mailto:contact@tyniy.com">contact@tyniy.com</a>
-                </p>
+            <section class="cta-section">
+                 <h2>Download Tyniy Today</h2>
+                 <p>Get started with 50 free compressions.</p>
+                 <a href="#" class="app-store-badge" aria-label="Download on the App Store">
+                    <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store">
+                 </a>
             </section>
-        </div>
-    </main>
+        </main>
+        
+        <footer class="footer">
+            <p>&copy; 2024 MILIVON. All rights reserved.</p>
+            <p><a href="mailto:contact@tyniy.com">Contact</a></p>
+        </footer>
 
-    <footer>
-        <div class="container">
-            <p>Developed by <a href="https://www.milivon.com" target="_blank" rel="noopener noreferrer">MILIVON</a></p>
-            <p style="margin-top: 0.5rem; font-size: 0.9rem;">© 2024 Tiniy. All rights reserved.</p>
-        </div>
-    </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('comparison-container');
+            if(container) {
+                const slider = container.querySelector('.slider-input');
+                const afterImage = container.querySelector('.after-image');
+                const handle = container.querySelector('.slider-handle');
+
+                slider.addEventListener('input', (e) => {
+                    const value = e.target.value;
+                    afterImage.style.clipPath = `polygon(0 0, ${value}% 0, ${value}% 100%, 0% 100%)`;
+                    handle.style.left = `${value}%`;
+                });
+            }
+        });
+    </script>
+
 </body>
-</html>
+</html> 
