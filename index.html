@@ -3,19 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tyniy - Professional Photo Compression</title>
+    <title>Tyniy — Professional Photo & Video Compression</title>
+    <meta name="description" content="Intelligently shrink photos and videos by up to 90% while preserving original visual quality. 100% private, on-device local compression.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --background: #1A1C20;
-            --card-background: #2A2D33;
-            --primary-text: #FFFFFF;
-            --secondary-text: #A0A0A0;
+            --bg-dark: #0A0C0E;
+            --bg-card: #14161B;
+            --bg-card-hover: #1D2028;
+            --text-primary: #FFFFFF;
+            --text-secondary: #9FA4B0;
+            --text-muted: #646873;
+            
             --accent-blue: #00AEEF;
+            --accent-blue-rgb: 0, 174, 239;
             --accent-orange: #FF8C42;
-            --blue-glow: rgba(0, 174, 239, 0.15);
-            --orange-glow: rgba(255, 140, 66, 0.15);
-            --border-radius: 12px;
-            --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            --accent-orange-rgb: 255, 140, 66;
+
+            --gradient-blue: linear-gradient(135deg, #00AEEF 0%, #0088CC 100%);
+            --gradient-orange: linear-gradient(135deg, #FF8C42 0%, #E67332 100%);
+            --gradient-dynamic: linear-gradient(135deg, #00AEEF 0%, #FF8C42 100%);
+            
+            --border-radius-xl: 24px;
+            --border-radius-lg: 16px;
+            --border-radius-md: 12px;
+            --border-radius-sm: 8px;
+            
+            --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-fast: all 0.15s ease-out;
+            --shadow-premium: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05);
+            --shadow-glow-blue: 0 0 20px rgba(var(--accent-blue-rgb), 0.15);
+            --shadow-glow-orange: 0 0 20px rgba(var(--accent-orange-rgb), 0.15);
         }
 
         * {
@@ -25,84 +48,290 @@
         }
 
         body {
-            font-family: var(--font-family);
-            background-color: var(--background);
-            color: var(--primary-text);
+            font-family: var(--font-body);
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
             line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Subtle grid background pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        /* Background blur spots */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(var(--accent-blue-rgb), 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(var(--accent-orange-rgb), 0.05) 0%, transparent 40%);
+            z-index: -1;
+            pointer-events: none;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 1.5rem;
         }
 
-        .header {
-            text-align: center;
-            padding: 4rem 0;
+        /* Header Navigation */
+        .nav-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.5rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .logo-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text-primary);
         }
 
         .app-icon {
-            width: 80px;
-            height: 80px;
-            background: #222;
-            border-radius: 22.5%;
-            display: inline-block;
-            margin-bottom: 1.5rem;
-            /* Placeholder for a real icon */
-            background: linear-gradient(45deg, var(--accent-blue), var(--accent-orange));
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .app-name {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 40px;
-            font-weight: bold;
-            color: white;
+            gap: 1.5rem;
         }
 
-        .app-icon-img {
-            width: 80px;
-            height: 80px;
-            border-radius: 22.5%;
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: var(--transition-fast);
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary);
+        }
+
+        /* Hero Styling */
+        .hero {
+            text-align: center;
+            padding: 4rem 0 3rem 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .announcement-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .badge-tag {
+            background: var(--gradient-dynamic);
+            padding: 2px 8px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: white;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .badge-text {
+            color: var(--text-secondary);
+        }
+
+        .hero-title {
+            font-family: var(--font-heading);
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
             margin-bottom: 1.5rem;
         }
 
-        .header h1 {
-            font-size: 2.5rem;
+        .gradient-text {
+            background: var(--gradient-dynamic);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        .hero-description {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .app-store-button {
+            display: inline-block;
+            height: 54px;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: var(--transition-smooth);
+            box-shadow: var(--shadow-premium);
+        }
+
+        .app-store-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(0, 174, 239, 0.2);
+        }
+
+        .app-store-button img {
+            height: 100%;
+            display: block;
+        }
+
+        /* Showcases Grid */
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        @media (max-width: 850px) {
+            .showcase-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Showcase Cards */
+        .showcase-card {
+            background-color: var(--bg-card);
+            border-radius: var(--border-radius-xl);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-premium);
+            transition: var(--transition-smooth);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .showcase-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, transparent 100%);
+        }
+
+        .showcase-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .showcase-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(0, 174, 239, 0.1);
+            color: var(--accent-blue);
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.8rem;
+        }
+
+        .showcase-badge.orange {
+            background: rgba(255, 140, 66, 0.1);
+            color: var(--accent-orange);
+        }
+
+        .showcase-title {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
         }
 
-        .header p {
-            font-size: 1.25rem;
-            color: var(--secondary-text);
+        .showcase-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
         }
 
-        .card {
-            background-color: var(--card-background);
-            border-radius: var(--border-radius);
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-        }
-
-        .section-title {
-            font-size: 1.8rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            text-align: center;
+        /* Image Slider Elements */
+        .comparison-container-wrapper {
+            background: #0D0F12;
+            border-radius: var(--border-radius-lg);
+            padding: 8px;
+            margin: 1.5rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .comparison-slider {
             position: relative;
             width: 100%;
+            aspect-ratio: 4/3;
             overflow: hidden;
-            border-radius: var(--border-radius);
+            border-radius: var(--border-radius-md);
+            cursor: ew-resize;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
         }
 
         .comparison-slider img {
             width: 100%;
-            height: auto;
+            height: 100%;
+            object-fit: cover;
             display: block;
+            user-select: none;
+            pointer-events: none;
         }
 
         .comparison-slider .after-image {
@@ -111,33 +340,36 @@
             left: 0;
             height: 100%;
             width: 100%;
-            object-fit: cover;
             clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
         }
 
-        .comparison-slider .slider-handle {
+        .slider-handle {
             position: absolute;
             top: 0;
             left: 50%;
-            width: 4px;
+            width: 2px;
             height: 100%;
-            background: white;
-            cursor: ew-resize;
+            background: rgba(255, 255, 255, 0.8);
             transform: translateX(-50%);
+            pointer-events: none;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .comparison-slider .slider-handle::after {
-            content: '↔';
-            position: absolute;
+        .slider-handle-button {
+            width: 36px;
+            height: 36px;
             background: white;
-            color: black;
-            padding: 5px;
             border-radius: 50%;
-            font-size: 18px;
-            line-height: 1;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0A0C0E;
+            font-size: 14px;
+            font-weight: bold;
         }
 
         .slider-input {
@@ -149,178 +381,956 @@
             margin: 0;
             opacity: 0;
             cursor: ew-resize;
+            z-index: 10;
+        }
+
+        .slider-label {
+            position: absolute;
+            bottom: 12px;
+            background: rgba(10, 12, 14, 0.75);
+            backdrop-filter: blur(4px);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            pointer-events: none;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: var(--transition-fast);
+            z-index: 5;
+        }
+
+        .slider-label.left {
+            left: 12px;
+        }
+
+        .slider-label.right {
+            right: 12px;
+        }
+
+        /* Hide labels when dragging closely */
+        .comparison-slider:hover .slider-label {
+            opacity: 0.8;
         }
 
         .compression-summary {
             display: flex;
-            justify-content: space-around;
-            text-align: center;
-            margin-top: 2rem;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 12px 16px;
+            border-radius: var(--border-radius-md);
+            border: 1px solid rgba(255, 255, 255, 0.03);
         }
 
-        .summary-item h3 {
-            font-size: 2rem;
+        .summary-metric {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .summary-metric-val {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 700;
             color: var(--accent-blue);
+            line-height: 1.2;
         }
-        .summary-item p {
-            color: var(--secondary-text);
+
+        .summary-metric-lbl {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
-        .summary-item .highlight {
-             color: var(--accent-orange);
-             font-weight: 600;
+
+        .summary-details {
+            text-align: right;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .summary-details span {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* Interactive Video Mockup Elements */
+        .video-mockup-container {
+            background: #0D0F12;
+            border-radius: var(--border-radius-lg);
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .video-card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 10px;
+            border-radius: var(--border-radius-md);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .video-thumbnail-placeholder {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, rgba(var(--accent-orange-rgb), 0.2) 0%, rgba(var(--accent-blue-rgb), 0.2) 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-orange);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .video-info {
+            flex-grow: 1;
+        }
+
+        .video-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 180px;
+        }
+
+        .video-meta {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            display: flex;
+            gap: 8px;
+        }
+
+        .video-badge {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 0.7rem;
+        }
+
+        .mockup-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .control-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+
+        .pill-selector {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            background: rgba(255, 255, 255, 0.03);
+            padding: 3px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .pill-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 6px 0;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: var(--transition-fast);
+        }
+
+        .pill-btn:hover {
+            color: var(--text-primary);
+        }
+
+        .pill-btn.active {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-primary);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Compression stats and progress */
+        .mockup-footer {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.015);
+            padding: 12px;
+            border-radius: var(--border-radius-md);
+            border: 1px solid rgba(255, 255, 255, 0.02);
+            margin-top: 4px;
+        }
+
+        .mockup-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .stats-left {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stats-title {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .stats-sizes {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .stats-sizes span {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .stats-saving-pill {
+            background: var(--gradient-orange);
+            color: white;
+            font-weight: 700;
+            font-size: 0.8rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-glow-orange);
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+            display: none;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: var(--gradient-orange);
+            border-radius: 10px;
+            transition: width 0.1s linear;
+        }
+
+        .compress-action-btn {
+            background: var(--gradient-orange);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 0;
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: var(--transition-smooth);
+            box-shadow: var(--shadow-glow-orange);
+        }
+
+        .compress-action-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 15px rgba(var(--accent-orange-rgb), 0.3);
+        }
+
+        .compress-action-btn:disabled {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+
+        /* Features Section */
+        .section-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 4rem auto 2.5rem auto;
+        }
+
+        .section-pretitle {
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent-blue);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .section-main-title {
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
         }
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
+            margin-bottom: 4rem;
         }
 
-        .feature-item {
-            background-color: var(--background);
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            text-align: center;
+        .feature-card {
+            background-color: var(--bg-card);
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-premium);
+            transition: var(--transition-smooth);
+            border: 1px solid rgba(255, 255, 255, 0.02);
+            position: relative;
         }
 
-        .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: var(--border-radius-lg);
+            border: 1px solid transparent;
+            background: linear-gradient(135deg, rgba(var(--accent-blue-rgb), 0.15), rgba(var(--accent-orange-rgb), 0.15)) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: destination-out;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: var(--transition-smooth);
+            pointer-events: none;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background-color: var(--bg-card-hover);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon-wrapper {
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: var(--accent-blue);
+            margin-bottom: 1.25rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition-smooth);
         }
 
-        .feature-item h3 {
-            font-size: 1.2rem;
+        .feature-card:hover .feature-icon-wrapper {
+            background: rgba(var(--accent-blue-rgb), 0.1);
+            color: var(--accent-blue);
+            transform: scale(1.05);
+        }
+
+        .feature-card.orange:hover .feature-icon-wrapper {
+            background: rgba(var(--accent-orange-rgb), 0.1);
+            color: var(--accent-orange);
+        }
+
+        .feature-card.orange .feature-icon-wrapper {
+            color: var(--accent-orange);
+        }
+
+        .feature-card h3 {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            font-weight: 700;
             margin-bottom: 0.5rem;
         }
 
-        .feature-item p {
-            color: var(--secondary-text);
+        .feature-card p {
+            color: var(--text-secondary);
             font-size: 0.95rem;
+            line-height: 1.5;
         }
 
-        .cta-section {
+        /* Call To Action Banner */
+        .cta-banner {
+            background: radial-gradient(circle at 50% 50%, rgba(var(--accent-blue-rgb), 0.12) 0%, transparent 60%), var(--bg-card);
+            border-radius: var(--border-radius-xl);
+            padding: 4rem 2rem;
             text-align: center;
-            padding: 2rem 0;
+            box-shadow: var(--shadow-premium);
+            margin: 4rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            position: relative;
+            overflow: hidden;
         }
 
-        .app-store-badge {
-            display: inline-block;
-            height: 57px; /* Standard height for App Store badges */
-            margin-top: 1rem;
-        }
-        .app-store-badge img {
-            height: 100%;
+        .cta-banner h2 {
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
         }
 
+        .cta-banner p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 500px;
+            margin: 0 auto 2rem auto;
+        }
+
+        /* Footer */
         .footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 3rem 0;
             text-align: center;
-            padding: 2rem 0;
-            color: var(--secondary-text);
+            color: var(--text-muted);
             font-size: 0.9rem;
         }
 
-        .footer a {
-            color: var(--secondary-text);
-            text-decoration: none;
+        .footer-copyright {
+            margin-bottom: 1rem;
         }
-        .footer a:hover {
-            color: var(--primary-text);
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .footer-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition-fast);
+        }
+
+        .footer-link:hover {
+            color: var(--text-primary);
+        }
+
+        .footer-divider {
+            color: rgba(255, 255, 255, 0.08);
+        }
+
+        /* Comparison Section Styles */
+        .comparison-section {
+            margin: 4rem 0;
+        }
+
+        .comparison-table-wrapper {
+            background-color: var(--bg-card);
+            border-radius: var(--border-radius-xl);
+            padding: 2.25rem;
+            box-shadow: var(--shadow-premium);
+            border: 1px solid rgba(255, 255, 255, 0.02);
+            overflow-x: auto;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        .comparison-table th {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            font-weight: 700;
+            padding: 1.25rem 1rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.08);
+            color: var(--text-primary);
+        }
+
+        .comparison-table th:nth-child(2) {
+            color: var(--accent-blue);
+        }
+
+        .comparison-table td {
+            padding: 1.25rem 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            color: var(--text-secondary);
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-table .feature-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .comparison-table .tyniy-cell {
+            color: var(--text-primary);
+        }
+
+        .comparison-table .tyniy-cell strong {
+            color: var(--accent-blue);
+            font-weight: 600;
+        }
+
+        .comparison-table .competitor-cell {
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 600px) {
+            .comparison-table th, .comparison-table td {
+                padding: 0.8rem 0.5rem;
+                font-size: 0.85rem;
+            }
+            .comparison-table th {
+                font-size: 0.95rem;
+            }
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <header class="header">
-            <img src="TyniyIcon.png" alt="Tyniy App Icon" class="app-icon-img">
-            <h1>Tyniy</h1>
-            <p>Professional Photo Compression</p>
+        
+        <!-- Navigation Header -->
+        <header class="nav-header">
+            <a href="#" class="logo-group">
+                <img src="TyniyIcon.png" alt="Tyniy" class="app-icon">
+                <span class="app-name">Tyniy</span>
+            </a>
+            <nav class="nav-links">
+                <a href="#features" class="nav-link">Features</a>
+                <a href="privacy.html" class="nav-link">Privacy</a>
+                <a href="terms.html" class="nav-link">Terms</a>
+            </nav>
         </header>
 
-        <main>
-            <section class="card">
-                <h2 class="section-title">See the Quality Preservation</h2>
-                <div class="comparison-slider" id="comparison-container">
-                    <img src="PuffinXXL.jpeg" alt="Original Uncompressed Image" class="before-image">
-                    <img src="PuffinS.JPEG" alt="Compressed Image" class="after-image">
-                    <div class="slider-handle"></div>
-                    <input type="range" min="0" max="100" value="50" class="slider-input" aria-label="Image comparison slider">
-                </div>
-                <div class="compression-summary">
-                    <div class="summary-item">
-                        <h3>92%</h3>
-                        <p>Average Size Reduction</p>
-                    </div>
-                     <div class="summary-item">
-                        <p>Original: <span class="highlight">7.2 MB</span></p>
-                         <p>Compressed: <span class="highlight">511 KB</span></p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="card">
-                <h2 class="section-title">Core Features</h2>
-                <div class="features-grid">
-                    <div class="feature-item">
-                        <div class="feature-icon">💾</div>
-                        <h3>Direct Import</h3>
-                        <p>Import from SD cards, external drives, and your iCloud Photos library.</p>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">✨</div>
-                        <h3>Powerful Compression</h3>
-                        <p>Advanced algorithms reduce file size dramatically with minimal quality loss.</p>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">🚀</div>
-                        <h3>Blazing Fast</h3>
-                        <p>Optimized for speed to fit into a professional photographer's workflow.</p>
-                    </div>
-                     <div class="feature-item">
-                        <div class="feature-icon">📱</div>
-                        <h3>iOS Native</h3>
-                        <p>Designed from the ground up for a seamless experience on iPhone & iPad.</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="cta-section">
-                 <h2>Download Tyniy Today</h2>
-                 <p>Get started with 50 free compressions.</p>
-                 <a href="#" class="app-store-badge" aria-label="Download on the App Store">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="announcement-badge">
+                <span class="badge-tag">NEW</span>
+                <span class="badge-text">Supporting high-efficiency video compression</span>
+            </div>
+            <h1 class="hero-title">Your photos and videos, <span class="gradient-text">beautifully tiny</span>.</h1>
+            <p class="hero-description">Shrink JPEGs, HEICs, MP4s, and MOVs by up to 90% with professional-grade quality preservation. Everything is processed offline, locally on your device.</p>
+            <div class="cta-buttons">
+                <a href="https://apps.apple.com/es/app/tyniy-image-compressor/id6748950345?l=en-GB&mt=12" class="app-store-button" aria-label="Download Tyniy on the App Store">
                     <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store">
-                 </a>
-            </section>
-        </main>
-        
+                </a>
+            </div>
+        </section>
+
+        <!-- Main Showcases Section -->
+        <section class="showcase-grid">
+
+            <!-- Card 1: Photo Quality Slider -->
+            <div class="showcase-card">
+                <div class="showcase-header">
+                    <div class="showcase-badge">Photos</div>
+                    <h2 class="showcase-title">Uncompromising Quality</h2>
+                    <p class="showcase-desc">Drag the slider to compare the original 7.2 MB photo with the compressed 511 KB version.</p>
+                </div>
+                
+                <div class="comparison-container-wrapper">
+                    <div class="comparison-slider" id="image-comparison">
+                        <img src="PuffinXXL.jpeg" alt="Original Uncompressed Image">
+                        <div class="after-image">
+                            <img src="PuffinS.JPEG" alt="Tyniy Compressed Image">
+                        </div>
+                        <span class="slider-label left">Original</span>
+                        <span class="slider-label right">Tiny (92%)</span>
+                        <div class="slider-handle">
+                            <div class="slider-handle-button">↔</div>
+                        </div>
+                        <input type="range" min="0" max="100" value="50" class="slider-input" aria-label="Image comparison slider">
+                    </div>
+                </div>
+
+                <div class="compression-summary">
+                    <div class="summary-metric">
+                        <span class="summary-metric-val">92.9%</span>
+                        <span class="summary-metric-lbl">Size Saved</span>
+                    </div>
+                    <div class="summary-details">
+                        <p>Original: <span>7.24 MB</span></p>
+                        <p>Compressed: <span>511 KB</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: Interactive Video Mockup -->
+            <div class="showcase-card">
+                <div class="showcase-header">
+                    <div class="showcase-badge orange">Videos</div>
+                    <h2 class="showcase-title">Flexible Video Controls</h2>
+                    <p class="showcase-desc">Choose target resolutions and quality settings. Choose to keep your original resolution.</p>
+                </div>
+
+                <div class="video-mockup-container">
+                    <div class="video-card-header">
+                        <div class="video-thumbnail-placeholder">
+                            <!-- Video Play icon -->
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">vlog_wedding_reception_4k.mp4</div>
+                            <div class="video-meta">
+                                <span class="video-badge">4K UHD</span>
+                                <span>0:45s</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mockup-controls">
+                        <div class="control-group">
+                            <span class="control-label">Target Resolution</span>
+                            <div class="pill-selector" id="res-selector">
+                                <button class="pill-btn active" data-res="keep">Original</button>
+                                <button class="pill-btn" data-res="1080p">1080p</button>
+                                <button class="pill-btn" data-res="720p">720p</button>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <span class="control-label">Compression Quality</span>
+                            <div class="pill-selector" id="quality-selector">
+                                <button class="pill-btn active" data-quality="high">High</button>
+                                <button class="pill-btn" data-quality="medium">Medium</button>
+                                <button class="pill-btn" data-quality="low">Low</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mockup-footer">
+                        <div class="mockup-stats">
+                            <div class="stats-left">
+                                <span class="stats-title">Estimated Result</span>
+                                <span class="stats-sizes"><span id="video-out-size">24.6 MB</span> of 154.2 MB</span>
+                            </div>
+                            <span class="stats-saving-pill" id="video-savings">-84%</span>
+                        </div>
+                        
+                        <!-- Progress bar -->
+                        <div class="progress-bar-container" id="video-progress">
+                            <div class="progress-bar-fill" id="video-progress-fill"></div>
+                        </div>
+
+                        <button class="compress-action-btn" id="compress-btn">Compress Video</button>
+                    </div>
+                </div>
+
+                <div class="compression-summary">
+                    <div class="summary-metric">
+                        <span class="summary-metric-val" style="color: var(--accent-orange)" id="footer-savings-val">84.0%</span>
+                        <span class="summary-metric-lbl">Estimated Reduction</span>
+                    </div>
+                    <div class="summary-details">
+                        <p>Original: <span>154.2 MB</span></p>
+                        <p>Compressed: <span id="footer-compressed-val">24.6 MB</span></p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Features Grid -->
+        <section id="features">
+            <div class="section-header">
+                <span class="section-pretitle">Engineered for Pros</span>
+                <h2 class="section-main-title">Fast, secure, and fully native.</h2>
+            </div>
+
+            <div class="features-grid">
+                
+                <!-- Feature 1 -->
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <!-- Privacy / Lock SVG -->
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                        </svg>
+                    </div>
+                    <h3>100% On-Device Privacy</h3>
+                    <p>All photo and video compression runs locally on your Apple device. Files are never uploaded to the cloud or remote servers.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="feature-card orange">
+                    <div class="feature-icon-wrapper">
+                        <!-- Play/Video SVG -->
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="23 7 16 12 23 17 23 7"></polygon>
+                            <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                        </svg>
+                    </div>
+                    <h3>Flexible Video Formats</h3>
+                    <p>Supports MP4, MOV, HEVC, and H.264 video assets. Set target resolutions or preserve your video's original layout.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <!-- Batch/Layers SVG -->
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                            <polyline points="2 17 12 22 22 17"></polyline>
+                            <polyline points="2 12 12 17 22 12"></polyline>
+                        </svg>
+                    </div>
+                    <h3>Massive Batch Processing</h3>
+                    <p>Compress entire photoshoots or libraries at once. Highly optimized queueing handles dozens of assets simultaneously.</p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="feature-card orange">
+                    <div class="feature-icon-wrapper">
+                        <!-- Database/EXIF SVG -->
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                            <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+                            <path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"></path>
+                        </svg>
+                    </div>
+                    <h3>EXIF Metadata Preservation</h3>
+                    <p>Retain important details including location details (GPS), timestamp data, camera model, and color profiles safely.</p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <!-- Bolt/Speed SVG -->
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                        </svg>
+                    </div>
+                    <h3>Hardware Accelerated</h3>
+                    <p>Leverages Apple Silicon Metal performance and neural capabilities to shrink your media in seconds without hot laptops.</p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="feature-card orange">
+                    <div class="feature-icon-wrapper">
+                        <!-- Gem/Premium SVG -->
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <path d="M16 10a4 4 0 0 1-8 0"></path>
+                        </svg>
+                    </div>
+                    <h3>100% Free on macOS</h3>
+                    <p>Tyniy for Mac is completely free. Optimize unlimited photos and videos with no subscriptions, trials, or hidden charges.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Comparison Section -->
+        <section class="comparison-section" id="comparison">
+            <div class="section-header">
+                <span class="section-pretitle">Comparison</span>
+                <h2 class="section-main-title">Tyniy vs. JPEGmini</h2>
+                <p style="color: var(--text-secondary); max-width: 600px; margin: 0.5rem auto 0 auto; font-size: 0.95rem;">A modern, fast, and lightweight JPEGmini alternative optimized for macOS workflows.</p>
+            </div>
+
+            <div class="comparison-table-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Tyniy for Mac</th>
+                            <th>JPEGmini for Mac</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="feature-name">Pricing Model</td>
+                            <td class="tyniy-cell"><strong>Free</strong></td>
+                            <td class="competitor-cell">Expensive license ($59 - $109) or subscription</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Image Resizing</td>
+                            <td class="tyniy-cell"><strong>Yes</strong> (Free resizing controls)</td>
+                            <td class="competitor-cell">Only in paid Pro editions ($59+)</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Video Compression</td>
+                            <td class="tyniy-cell"><strong>Yes</strong> (HEVC, H.264, MP4, MOV)</td>
+                            <td class="competitor-cell">Only in higher pricing tiers</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Keep Original Resolution</td>
+                            <td class="tyniy-cell"><strong>Yes</strong> (Custom control for videos & photos)</td>
+                            <td class="competitor-cell">Supported</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">100% On-Device Privacy</td>
+                            <td class="tyniy-cell"><strong>Yes</strong> (Processed completely offline)</td>
+                            <td class="competitor-cell">Yes (Offline)</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">macOS Integration</td>
+                            <td class="tyniy-cell"><strong>Native Share Sheet, drag-and-drop support</strong></td>
+                            <td class="competitor-cell">Standalone app + Plugins</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Apple Silicon Optimization</td>
+                            <td class="tyniy-cell"><strong>Yes</strong> (Hardware accelerated with Metal API)</td>
+                            <td class="competitor-cell">Supported</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- CTA Banner -->
+        <section class="cta-banner">
+            <h2>Download Tyniy Today</h2>
+            <p>Get started optimizing your photos and videos on macOS today. 100% free.</p>
+            <a href="https://apps.apple.com/es/app/tyniy-image-compressor/id6748950345?l=en-GB&mt=12" class="app-store-button" aria-label="Download Tyniy on the App Store">
+                <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store">
+            </a>
+        </section>
+
+        <!-- Footer -->
         <footer class="footer">
-            <p>&copy; 2024 MILIVON. All rights reserved.</p>
-            <p>
-                <a href="mailto:contact@tyniy.com">Contact</a> |
-                <a href="privacy.html">Privacy Policy</a> |
-                <a href="terms.html">Terms of Service</a>
-            </p>
+            <p class="footer-copyright">&copy; 2026 MILIVON. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="mailto:contact@tyniy.com" class="footer-link">Contact</a>
+                <span class="footer-divider">|</span>
+                <a href="privacy.html" class="footer-link">Privacy Policy</a>
+                <span class="footer-divider">|</span>
+                <a href="terms.html" class="footer-link">Terms of Service</a>
+            </div>
         </footer>
 
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const container = document.getElementById('comparison-container');
-            if(container) {
-                const slider = container.querySelector('.slider-input');
-                const afterImage = container.querySelector('.after-image');
-                const handle = container.querySelector('.slider-handle');
+            
+            // Image Comparison Slider logic
+            const imageSlider = document.getElementById('image-comparison');
+            if (imageSlider) {
+                const sliderInput = imageSlider.querySelector('.slider-input');
+                const afterImage = imageSlider.querySelector('.after-image');
+                const handle = imageSlider.querySelector('.slider-handle');
 
-                slider.addEventListener('input', (e) => {
+                sliderInput.addEventListener('input', (e) => {
                     const value = e.target.value;
                     afterImage.style.clipPath = `polygon(0 0, ${value}% 0, ${value}% 100%, 0% 100%)`;
                     handle.style.left = `${value}%`;
                 });
             }
+
+            // Interactive Video Mockup logic
+            const resSelector = document.getElementById('res-selector');
+            const qualitySelector = document.getElementById('quality-selector');
+            const videoOutSize = document.getElementById('video-out-size');
+            const videoSavings = document.getElementById('video-savings');
+            const footerSavingsVal = document.getElementById('footer-savings-val');
+            const footerCompressedVal = document.getElementById('footer-compressed-val');
+            
+            const compressBtn = document.getElementById('compress-btn');
+            const progressBar = document.getElementById('video-progress');
+            const progressBarFill = document.getElementById('video-progress-fill');
+
+            const baseSize = 154.2;
+            let currentRes = 'keep';
+            let currentQuality = 'high';
+
+            const resFactors = {
+                'keep': 1.0,
+                '1080p': 0.65,
+                '720p': 0.40
+            };
+
+            const qualityFactors = {
+                'high': 0.16,
+                'medium': 0.10,
+                'low': 0.057
+            };
+
+            function updateVideoStats() {
+                const resFactor = resFactors[currentRes];
+                const qualityFactor = qualityFactors[currentQuality];
+                
+                const finalSize = (baseSize * resFactor * qualityFactor).toFixed(1);
+                const percentSaved = Math.round((1 - (finalSize / baseSize)) * 100);
+
+                // Update text elements
+                videoOutSize.textContent = `${finalSize} MB`;
+                videoSavings.textContent = `-${percentSaved}%`;
+                
+                footerSavingsVal.textContent = `${percentSaved}.0%`;
+                footerCompressedVal.textContent = `${finalSize} MB`;
+            }
+
+            // Event listeners for pills
+            resSelector.addEventListener('click', (e) => {
+                if (e.target.classList.contains('pill-btn')) {
+                    resSelector.querySelectorAll('.pill-btn').forEach(btn => btn.classList.remove('active'));
+                    e.target.classList.add('active');
+                    currentRes = e.target.getAttribute('data-res');
+                    updateVideoStats();
+                }
+            });
+
+            qualitySelector.addEventListener('click', (e) => {
+                if (e.target.classList.contains('pill-btn')) {
+                    qualitySelector.querySelectorAll('.pill-btn').forEach(btn => btn.classList.remove('active'));
+                    e.target.classList.add('active');
+                    currentQuality = e.target.getAttribute('data-quality');
+                    updateVideoStats();
+                }
+            });
+
+            // Simulate compression action
+            compressBtn.addEventListener('click', () => {
+                compressBtn.disabled = true;
+                compressBtn.textContent = 'Compressing...';
+                progressBar.style.display = 'block';
+                progressBarFill.style.width = '0%';
+
+                let progress = 0;
+                const interval = setInterval(() => {
+                    progress += 4;
+                    progressBarFill.style.width = `${progress}%`;
+                    
+                    if (progress >= 100) {
+                        clearInterval(interval);
+                        compressBtn.textContent = 'Ready! Saved ' + videoSavings.textContent;
+                        setTimeout(() => {
+                            compressBtn.disabled = false;
+                            compressBtn.textContent = 'Compress Video';
+                            progressBar.style.display = 'none';
+                            progressBarFill.style.width = '0%';
+                        }, 2500);
+                    }
+                }, 80);
+            });
         });
     </script>
-
 </body>
-</html> 
+</html>
