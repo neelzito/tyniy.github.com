@@ -3,16 +3,76 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tyniy — Much smaller photos, no visible difference</title>
-<meta name="description" content="Tyniy shrinks photos and videos on your Mac, iPhone and iPad while keeping them visually identical. A free JPEGmini alternative: no ads, no subscriptions, 100% on-device.">
-<meta property="og:title" content="Tyniy — Much smaller photos, no visible difference">
-<meta property="og:description" content="Free photo and video compressor for Mac, iPhone and iPad. No ads, no subscriptions, everything stays on your device.">
+<title>Tyniy – Free Photo &amp; Video Compressor for iPhone, iPad and Mac</title>
+<meta name="description" content="Compress photos and videos on iPhone, iPad and Mac and free up storage without visible quality loss. Keeps date, location and albums. A free JPEGmini alternative: no ads, no subscriptions, 100% on-device.">
+<link rel="canonical" href="https://www.tyniy.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tyniy">
+<meta property="og:title" content="Tyniy – Much smaller photos, no visible difference">
+<meta property="og:description" content="Free photo and video compressor for iPhone, iPad and Mac. Free up storage right in your photo library. No ads, no subscriptions, everything stays on your device.">
 <meta property="og:image" content="https://www.tyniy.com/assets/og-image.jpg">
 <meta property="og:url" content="https://www.tyniy.com/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <meta name="apple-itunes-app" content="app-id=6747710470">
+<meta name="theme-color" content="#ECE9E3" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#151514" media="(prefers-color-scheme: dark)">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.tyniy.com/#org",
+      "name": "MILIVON",
+      "url": "https://www.tyniy.com/",
+      "email": "contact@tyniy.com"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Tyniy: Compress Photo & Video",
+      "operatingSystem": "iOS, iPadOS",
+      "applicationCategory": "MultimediaApplication",
+      "url": "https://apps.apple.com/app/id6747710470",
+      "image": "https://www.tyniy.com/assets/icon-iphone.png",
+      "description": "Compress photos and videos right in your iPhone or iPad photo library and free up storage without visible quality loss.",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "publisher": { "@id": "https://www.tyniy.com/#org" }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Tyniy Image & Video Compressor",
+      "operatingSystem": "macOS",
+      "applicationCategory": "MultimediaApplication",
+      "url": "https://apps.apple.com/app/id6748950345",
+      "image": "https://www.tyniy.com/assets/icon-mac.png",
+      "description": "Compress JPEG, HEIC, PNG, MP4 and MOV files and your Photos library on the Mac without visible quality loss. Watch folders, Finder and Shortcuts.",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "publisher": { "@id": "https://www.tyniy.com/#org" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "How do I compress photos on my iPhone without losing quality?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Install Tyniy, tap + and pick photos and videos, or scan your library to see what can get smaller. Tyniy compresses each photo only as far as it can without a visible change, then puts the smaller version in your library with its date, location, favorites and albums. iOS asks you to confirm before anything is replaced." } },
+        { "@type": "Question", "name": "Can I get my original photos back?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Replaced originals go to Recently Deleted in Photos on iPhone and iPad, and to the Trash on the Mac, where you can restore them until they are emptied. Files on an SD card or drive connected to an iPhone or iPad are overwritten in place, so Tyniy asks first, and you can save to another folder instead." } },
+        { "@type": "Question", "name": "Why does Tyniy say some photos are already small?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Tyniy leaves a file untouched when it can't be made meaningfully smaller. Photos taken with a recent iPhone in HEIC are often already efficient. Older JPEGs, photos from cameras, screenshots and videos usually shrink the most." } },
+        { "@type": "Question", "name": "Does Tyniy compress videos and Live Photos?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Videos are compressed with HEVC, trying several quality steps per clip and keeping the smallest result that still looks the same. Live Photos are compressed together with their motion and stay Live Photos." } },
+        { "@type": "Question", "name": "Is Tyniy really free?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Tyniy is free on iPhone, iPad and Mac with no ads, no subscriptions, no in-app purchases and no limits." } },
+        { "@type": "Question", "name": "Are my photos uploaded anywhere?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. Tyniy compresses everything on your device and makes no network connections. There are no accounts, no analytics and no tracking." } },
+        { "@type": "Question", "name": "Is Tyniy a free JPEGmini alternative?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Like JPEGmini, Tyniy shrinks photos without visible loss, but it is free without daily limits, runs on iPhone and iPad as well as the Mac, and includes PNG, video, WebP and AVIF output and watch folders." } }
+      ]
+    }
+  ]
+}
+</script>
 <style>
 :root {
   --body: #ECE9E3;
@@ -60,6 +120,7 @@ body {
 a { color: inherit; }
 img { display: block; max-width: 100%; height: auto; }
 .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
 
 /* Small widely spaced capitals, like the engravings on a camera top plate */
 .label {
@@ -126,6 +187,28 @@ section + section { border-top: 0.5px solid var(--hairline); }
 .tile .num small { font-size: 14px; color: var(--ink-2); margin-left: 3px; }
 .fine { text-align: center; color: var(--ink-3); font-size: 13px; margin-top: 18px; }
 
+/* Gallery: the App Store frames, in a strip you can swipe */
+.tabs { display: inline-flex; gap: 4px; padding: 4px; border-radius: 12px; background: var(--readout); margin: 0 auto 32px; }
+.tabs-row { text-align: center; }
+.tabs button {
+  font: inherit; font-size: 14px; font-weight: 600; color: var(--ink-2); background: none; border: 0; border-radius: 9px;
+  padding: 8px 18px; cursor: pointer;
+}
+.tabs button[aria-selected="true"] {
+  color: var(--ink); background: linear-gradient(var(--raised-top), var(--raised-bottom));
+  box-shadow: inset 0 1px 0 var(--highlight), 0 2px 6px var(--shadow);
+}
+.strip {
+  display: grid; grid-auto-flow: column; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory;
+  padding: 6px 24px 28px; margin: 0 -24px; scrollbar-width: thin; overscroll-behavior-x: contain;
+}
+.strip[hidden] { display: none; }
+.strip figure { scroll-snap-align: center; }
+.strip img { border-radius: 18px; box-shadow: 0 18px 36px var(--shadow); background: var(--readout); }
+.strip.phones-strip { grid-auto-columns: minmax(220px, 1fr); }
+.strip.mac-strip { grid-auto-columns: min(84%, 640px); }
+.strip figcaption { font-size: 14px; color: var(--ink-2); text-align: center; margin-top: 14px; }
+
 /* Steps */
 .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
 .step { padding: 28px; border-radius: 16px; background: var(--readout); }
@@ -158,6 +241,21 @@ h1, h2, h3 { text-wrap: balance; }
 .phones img:last-child { margin-top: 48px; }
 .mac-shot { filter: drop-shadow(0 26px 44px var(--shadow)); max-width: min(520px, 100%); margin: 0 auto; }
 
+/* Review */
+.quote { max-width: 760px; margin: 0 auto; text-align: center; }
+.quote blockquote p:first-child { font-size: clamp(26px, 3.4vw, 36px); font-weight: 650; letter-spacing: -0.02em; line-height: 1.15; }
+.quote blockquote p + p { color: var(--ink-2); font-size: 18px; margin-top: 16px; }
+.quote cite { display: block; font-style: normal; margin-top: 18px; }
+
+/* FAQ */
+.faq { max-width: 820px; margin: 0 auto; border-top: 0.5px solid var(--hairline); }
+.faq details { border-bottom: 0.5px solid var(--hairline); }
+.faq summary { list-style: none; cursor: pointer; padding: 20px 36px 20px 0; font-size: 17px; font-weight: 600; position: relative; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; position: absolute; right: 4px; top: 16px; font-size: 24px; font-weight: 300; color: var(--accent-text); }
+.faq details[open] summary::after { content: "–"; }
+.faq details p { color: var(--ink-2); font-size: 16px; padding: 0 0 22px; max-width: 44em; }
+
 /* Comparison table */
 table { width: 100%; max-width: 860px; margin: 0 auto; border-collapse: collapse; font-size: 15.5px; }
 th, td { text-align: left; padding: 15px 14px; border-bottom: 0.5px solid var(--hairline); vertical-align: top; }
@@ -181,8 +279,10 @@ footer a:hover { color: var(--ink); }
   nav ul { gap: 16px; }
   section { padding: 72px 0; }
   th, td { padding: 12px 8px; font-size: 14px; }
+  .strip.phones-strip { grid-auto-columns: 62%; }
 }
 @media (max-width: 520px) { nav ul li.hide-small { display: none; } footer a { margin: 0 14px 0 0; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .badge { transition: none; } }
 </style>
 </head>
 <body>
@@ -193,6 +293,7 @@ footer a:hover { color: var(--ink); }
     <ul>
       <li class="hide-small"><a href="#how">How it works</a></li>
       <li><a href="#features">Features</a></li>
+      <li class="hide-small"><a href="#faq">FAQ</a></li>
       <li class="hide-small"><a href="#jpegmini">vs. JPEGmini</a></li>
       <li><a href="privacy.html">Privacy</a></li>
     </ul>
@@ -201,23 +302,23 @@ footer a:hover { color: var(--ink); }
 
 <header class="hero">
   <div class="wrap">
-    <div class="label accent">Free for Mac, iPhone and iPad</div>
+    <div class="label accent">Free for iPhone, iPad and Mac</div>
     <h1><span>Much smaller photos.</span> <span>No visible difference.</span></h1>
-    <p class="lead">Tyniy shrinks your photos and videos while keeping them visually identical to the originals, so you get your storage back without giving up quality.</p>
+    <p class="lead">Tyniy compresses your photos and videos so they look the same as the originals but take up a fraction of the space. Free up storage right in your photo library, without deleting a single memory.</p>
     <div class="badges">
-      <a class="badge" href="https://apps.apple.com/app/id6748950345?mt=12">
-        <img src="assets/icon-mac.png" alt="">
-        <span><small>Download on the Mac App Store</small><strong>Tyniy for Mac</strong></span>
-      </a>
       <a class="badge" href="https://apps.apple.com/app/id6747710470">
         <img src="assets/icon-iphone.png" alt="">
         <span><small>Download on the App Store</small><strong>Tyniy for iPhone &amp; iPad</strong></span>
       </a>
+      <a class="badge" href="https://apps.apple.com/app/id6748950345?mt=12">
+        <img src="assets/icon-mac.png" alt="">
+        <span><small>Download on the Mac App Store</small><strong>Tyniy for Mac</strong></span>
+      </a>
     </div>
     <p class="free-note">100% free. No ads, no subscriptions, no limits. Everything happens on your device.</p>
     <div class="hero-shot">
-      <img class="light" src="assets/mac-light.png" alt="The Tyniy window after compressing 12 photos: 94 MB saved, 66% smaller" width="1100">
-      <img class="dark" src="assets/mac-dark.png" alt="The Tyniy window while compressing, in dark mode" width="1100">
+      <img class="light" src="assets/mac-light.webp" alt="The Tyniy window after compressing 12 photos: 94 MB saved, 66% smaller" width="789" height="1100">
+      <img class="dark" src="assets/mac-dark.webp" alt="The Tyniy window while compressing, in dark mode" width="789" height="1100">
     </div>
   </div>
 </header>
@@ -230,8 +331,8 @@ footer a:hover { color: var(--ink); }
       <p>A 100% crop of a 24-megapixel photo before and after Tyniy. Drag the divider.</p>
     </div>
     <div class="compare" id="slider" role="slider" aria-label="Compare original and compressed" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" tabindex="0">
-      <img src="assets/detail-tyniy.jpg" alt="Detail after compression with Tyniy" width="1600" height="1000">
-      <img class="top" src="assets/detail-original.jpg" alt="Detail of the original photo" width="1600" height="1000">
+      <img src="assets/detail-tyniy.jpg" alt="Detail after compression with Tyniy" width="1600" height="1000" loading="lazy">
+      <img class="top" src="assets/detail-original.jpg" alt="Detail of the original photo" width="1600" height="1000" loading="lazy">
       <div class="divider"></div><div class="knob"></div>
       <span class="tag l">ORIGINAL</span><span class="tag r">TYNIY</span>
     </div>
@@ -244,6 +345,35 @@ footer a:hover { color: var(--ink); }
   </div>
 </section>
 
+<section id="gallery">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="label accent">A closer look</div>
+      <h2>Calm on the outside.</h2>
+      <p>One dial, three readouts and your files. Inspired by classic camera design, in light and dark.</p>
+    </div>
+    <div class="tabs-row">
+      <div class="tabs" role="tablist" aria-label="Choose a device">
+        <button role="tab" id="tab-iphone" aria-controls="strip-iphone" aria-selected="true">iPhone &amp; iPad</button>
+        <button role="tab" id="tab-mac" aria-controls="strip-mac" aria-selected="false" tabindex="-1">Mac</button>
+      </div>
+    </div>
+    <div class="strip phones-strip" id="strip-iphone" role="tabpanel" aria-labelledby="tab-iphone" tabindex="0">
+      <figure><img src="assets/store/iphone-01-hero.webp" alt="Free up space. Same photos. Tyniy on iPhone after a run: 63 MB saved, 66% smaller" width="660" height="1434" loading="lazy"><figcaption>Space back, right in your library</figcaption></figure>
+      <figure><img src="assets/store/iphone-02-batch.webp" alt="Pick photos. Tyniy does the rest. Tyniy compressing a batch in dark mode" width="660" height="1434" loading="lazy"><figcaption>Whole albums at once</figcaption></figure>
+      <figure><img src="assets/store/iphone-03-compare.webp" alt="Compare it yourself. The original and Tyniy's version side by side, 9 MB to 2.4 MB" width="660" height="1434" loading="lazy"><figcaption>Compare any photo with its original</figcaption></figure>
+      <figure><img src="assets/store/iphone-04-promise.webp" alt="Your photos stay on your iPhone. No accounts, no uploads, no ads, no tracking" width="660" height="1434" loading="lazy"><figcaption>Private by design</figcaption></figure>
+    </div>
+    <div class="strip mac-strip" id="strip-mac" role="tabpanel" aria-labelledby="tab-mac" tabindex="0" hidden>
+      <figure><img src="assets/store/mac-01-hero.webp" alt="Much smaller photos. No visible difference. Tyniy for Mac after compressing 12 photos" width="1440" height="900" loading="lazy"><figcaption>Drop photos and videos, get files often more than half smaller</figcaption></figure>
+      <figure><img src="assets/store/mac-02-batch.webp" alt="Whole photoshoots in one go. Tyniy for Mac compressing several photos at once" width="1440" height="900" loading="lazy"><figcaption>Whole photoshoots in one go</figcaption></figure>
+      <figure><img src="assets/store/mac-03-compare.webp" alt="Compare it yourself. Tyniy's compare view with the original on the left" width="1440" height="900" loading="lazy"><figcaption>Check any photo at 100%</figcaption></figure>
+      <figure><img src="assets/store/mac-04-safe.webp" alt="Safe by design. Replaced originals go to the Trash, where you can restore them" width="1440" height="900" loading="lazy"><figcaption>Originals go to the Trash, where you can restore them</figcaption></figure>
+      <figure><img src="assets/store/mac-05-promise.webp" alt="Your photos stay on your Mac. JPEG, HEIC, PNG, MP4, MOV, watch folders, Finder right-click, Shortcuts" width="1440" height="900" loading="lazy"><figcaption>Watch folders, Finder and Shortcuts</figcaption></figure>
+    </div>
+  </div>
+</section>
+
 <section id="how">
   <div class="wrap">
     <div class="section-head">
@@ -252,9 +382,9 @@ footer a:hover { color: var(--ink); }
       <p>Tyniy works out how much each photo can be compressed without a visible change, so you don't have to.</p>
     </div>
     <div class="steps">
-      <div class="step"><div class="n">1</div><h3>Add photos</h3><p>Drop photos or whole folders on the Mac, or pick them on iPhone and iPad from your library or straight from an SD card.</p></div>
-      <div class="step"><div class="n">2</div><h3>Tyniy compresses</h3><p>Compression starts right away, several photos at once. Files that can't get meaningfully smaller are left exactly as they are.</p></div>
-      <div class="step"><div class="n">3</div><h3>Space is back</h3><p>The smaller files take the originals' place. The originals go to the Trash or Recently Deleted, so you can restore them. Files on an SD card are overwritten, so Tyniy asks first.</p></div>
+      <div class="step"><div class="n">1</div><h3>Add photos</h3><p>Pick photos and videos on iPhone and iPad, or scan your library to see where the space is. On the Mac, drop files and folders or open your Photos library.</p></div>
+      <div class="step"><div class="n">2</div><h3>Tyniy compresses</h3><p>Compression starts right away, several photos at once. Every result is checked, and files that can't get meaningfully smaller are left exactly as they are.</p></div>
+      <div class="step"><div class="n">3</div><h3>Space is back</h3><p>The smaller files take the originals' place, with the same date, location and albums. Originals go to Recently Deleted or the Trash, where you can restore them.</p></div>
     </div>
   </div>
 </section>
@@ -266,14 +396,14 @@ footer a:hover { color: var(--ink); }
       <h2>Simple outside. Careful inside.</h2>
     </div>
     <div class="features">
+      <div class="feature"><div class="label">Library scan</div><h3>See where the space is</h3><p>Tyniy scans your library and shows how much each kind of photo and video could free, then compresses them with one tap.</p></div>
       <div class="feature"><div class="label">Engine</div><h3>jpegli encoder</h3><p>Photos are encoded with jpegli, a modern JPEG encoder that targets what the human eye can actually see.</p></div>
-      <div class="feature"><div class="label">Safety</div><h3>Originals you can restore</h3><p>Replaced originals go to the Trash on the Mac and to Recently Deleted in Photos. On an SD card, Tyniy asks before overwriting.</p></div>
-      <div class="feature"><div class="label">Metadata</div><h3>EXIF and colors kept</h3><p>Camera, lens, date, GPS, orientation and color profiles carry over, so Display P3 and Adobe RGB photos keep their colors.</p></div>
-      <div class="feature"><div class="label">Formats</div><h3>JPEG, HEIC, PNG, MP4, MOV</h3><p>Optionally convert photos to WebP or AVIF for websites.</p></div>
-      <div class="feature"><div class="label">Screenshots</div><h3>Much smaller PNGs</h3><p>Screenshots and graphics shrink a lot while keeping transparency, sharp edges and Retina resolution.</p></div>
-      <div class="feature"><div class="label">Compare</div><h3>See for yourself</h3><p>Check any photo side by side with its original and zoom in to the pixel.</p></div>
-      <div class="feature"><div class="label">Mac</div><h3>Watch folders</h3><p>New photos and videos in folders you choose, like Desktop or Downloads, are compressed automatically.</p></div>
-      <div class="feature"><div class="label">Automation</div><h3>Finder and Shortcuts</h3><p>Right-click in Finder and choose "Compress with Tyniy", or use the "Compress Files" action in Shortcuts.</p></div>
+      <div class="feature"><div class="label">Videos</div><h3>Smaller videos</h3><p>An HEVC encoder tries several quality steps for each clip and keeps the smallest result that still looks the same.</p></div>
+      <div class="feature"><div class="label">Live Photos</div><h3>Still Live Photos</h3><p>The photo and its motion are compressed together and checked as a pair before anything is replaced.</p></div>
+      <div class="feature"><div class="label">Safety</div><h3>Originals you can restore</h3><p>Replaced originals go to Recently Deleted in Photos or the Trash on the Mac. On an SD card, Tyniy asks before overwriting.</p></div>
+      <div class="feature"><div class="label">Metadata</div><h3>EXIF and colors kept</h3><p>Camera, lens, date, GPS, orientation and color profiles carry over, so Display P3 and HDR photos keep their colors.</p></div>
+      <div class="feature"><div class="label">Formats</div><h3>JPEG, HEIC, PNG, MP4, MOV</h3><p>Screenshots shrink a lot while staying sharp. Optionally convert photos to WebP or AVIF for websites.</p></div>
+      <div class="feature"><div class="label">Mac</div><h3>Watch folders, Finder, Shortcuts</h3><p>Compress new files in folders like Downloads automatically, right-click in Finder, or use the "Compress Files" action.</p></div>
       <div class="feature"><div class="label">Privacy</div><h3>Nothing leaves your device</h3><p>No accounts, no uploads, no analytics. Tyniy works completely offline.</p></div>
     </div>
   </div>
@@ -281,37 +411,50 @@ footer a:hover { color: var(--ink); }
 
 <section id="apps">
   <div class="wrap">
-    <div class="platform">
-      <div class="shot"><img class="mac-shot" src="assets/mac-dark.png" alt="Tyniy for Mac compressing photos, the dial glowing orange" width="1100"></div>
-      <div>
-        <div class="label accent">Tyniy for Mac</div>
-        <h2>Whole photoshoots in one go.</h2>
-        <p>Drop files or folders from your Mac, an SD card or an external drive. The dial fills as photos finish.</p>
-        <ul>
-          <li>Replace originals, save next to them, or save to a folder</li>
-          <li>Watch folders with a menu bar icon</li>
-          <li>Finder right-click and Shortcuts action</li>
-        </ul>
-        <a class="badge" href="https://apps.apple.com/app/id6748950345?mt=12"><img src="assets/icon-mac.png" alt=""><span><small>Mac App Store</small><strong>Get Tyniy for Mac</strong></span></a>
-      </div>
-    </div>
     <div class="platform flip">
       <div class="shot phones">
-        <img src="assets/iphone-done-light.jpg" alt="Tyniy on iPhone after compressing 8 photos" width="600">
-        <img src="assets/iphone-work-dark.jpg" alt="Tyniy on iPhone while compressing, in dark mode" width="600">
+        <img src="assets/iphone-done-light.jpg" alt="Tyniy on iPhone after compressing 8 photos" width="598" height="1300" loading="lazy">
+        <img src="assets/iphone-work-dark.jpg" alt="Tyniy on iPhone while compressing, in dark mode" width="598" height="1300" loading="lazy">
       </div>
       <div>
         <div class="label accent">Tyniy for iPhone &amp; iPad</div>
-        <h2>Free up space, right in your library.</h2>
-        <p>Pick photos and videos. Tyniy puts the smaller versions in your library with their original date, location, favorites and albums.</p>
+        <h2>Free up iPhone storage without deleting photos.</h2>
+        <p>Pick photos and videos, or let Tyniy find what can get smaller. The smaller versions go back into your library with their original date, location, favorites and albums.</p>
         <ul>
-          <li>iOS asks you once to confirm a whole batch</li>
-          <li>Originals stay in Recently Deleted for 30 days</li>
+          <li>Scan your library to see how much space you could free</li>
+          <li>iOS asks once per run before anything is replaced</li>
+          <li>Originals go to Recently Deleted, where you can restore them</li>
           <li>Compress photos right on an SD card, before you import them</li>
         </ul>
         <a class="badge" href="https://apps.apple.com/app/id6747710470"><img src="assets/icon-iphone.png" alt=""><span><small>App Store</small><strong>Get Tyniy for iPhone</strong></span></a>
       </div>
     </div>
+    <div class="platform">
+      <div class="shot"><img class="mac-shot" src="assets/mac-dark.webp" alt="Tyniy for Mac compressing photos, the dial glowing orange" width="789" height="1100" loading="lazy"></div>
+      <div>
+        <div class="label accent">Tyniy for Mac</div>
+        <h2>Whole photoshoots in one go.</h2>
+        <p>Drop files or folders from your Mac, an SD card or an external drive, or compress right in your Photos library. Tens of thousands of files are no problem.</p>
+        <ul>
+          <li>Compress and scan your Photos library on the Mac</li>
+          <li>Replace originals, save next to them, or save to a folder</li>
+          <li>Put Back Original if you change your mind</li>
+          <li>Watch folders, Finder right-click and Shortcuts</li>
+        </ul>
+        <a class="badge" href="https://apps.apple.com/app/id6748950345?mt=12"><img src="assets/icon-mac.png" alt=""><span><small>Mac App Store</small><strong>Get Tyniy for Mac</strong></span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="review">
+  <div class="wrap quote">
+    <div class="label accent">From the Mac App Store</div>
+    <blockquote>
+      <p>“Too good to be free!”</p>
+      <p>“It compresses your photos, and so far I find no perceptible quality loss. I’ve been using JPEGMini for years …”</p>
+    </blockquote>
+    <cite class="label">App Store review, United States</cite>
   </div>
 </section>
 
@@ -354,16 +497,34 @@ footer a:hover { color: var(--ink); }
   </div>
 </section>
 
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="label accent">Questions</div>
+      <h2>Good to know.</h2>
+    </div>
+    <div class="faq">
+      <details><summary>How do I compress photos on my iPhone without losing quality?</summary><p>Install Tyniy, tap + and pick photos and videos, or scan your library to see what can get smaller. Tyniy compresses each photo only as far as it can without a visible change, then puts the smaller version in your library with its date, location, favorites and albums. iOS asks you to confirm before anything is replaced.</p></details>
+      <details><summary>Can I get my original photos back?</summary><p>Yes. Replaced originals go to Recently Deleted in Photos on iPhone and iPad, and to the Trash on the Mac, where you can restore them until they're emptied. Files on an SD card or a drive connected to an iPhone or iPad are overwritten in place, so Tyniy asks first, and you can save to another folder instead.</p></details>
+      <details><summary>Why does Tyniy say some photos are “already small”?</summary><p>Tyniy leaves a file untouched when it can't be made meaningfully smaller. Photos taken with a recent iPhone in HEIC are often already efficient. Older JPEGs, photos from cameras, screenshots and videos usually shrink the most.</p></details>
+      <details><summary>Does Tyniy compress videos and Live Photos?</summary><p>Yes. Videos are compressed with HEVC, trying several quality steps per clip and keeping the smallest result that still looks the same. Live Photos are compressed together with their motion and stay Live Photos.</p></details>
+      <details><summary>Is Tyniy really free?</summary><p>Yes. Tyniy is free on iPhone, iPad and Mac, with no ads, no subscriptions, no in-app purchases and no limits.</p></details>
+      <details><summary>Are my photos uploaded anywhere?</summary><p>No. Tyniy compresses everything on your device and makes no network connections. There are no accounts, no analytics and no tracking. See the <a href="privacy.html">privacy policy</a>.</p></details>
+      <details><summary>Is Tyniy a free JPEGmini alternative?</summary><p>Yes. Like JPEGmini, Tyniy shrinks photos without visible loss, but it's free without daily limits, runs on iPhone and iPad as well as the Mac, and includes PNG, video, WebP and AVIF output and watch folders. See the <a href="#jpegmini">comparison</a>.</p></details>
+    </div>
+  </div>
+</section>
+
 <section class="closing">
   <div class="wrap">
-    <img class="icon" src="assets/icon-mac.png" alt="Tyniy app icon">
+    <img class="icon" src="assets/icon-mac.png" alt="Tyniy app icon" width="120" height="120" loading="lazy">
     <div class="section-head" style="margin-bottom: 0">
       <h2>Get your storage back.</h2>
-      <p>Free, private and simple. On Mac, iPhone and iPad.</p>
+      <p>Free, private and simple. On iPhone, iPad and Mac.</p>
     </div>
     <div class="badges">
-      <a class="badge" href="https://apps.apple.com/app/id6748950345?mt=12"><img src="assets/icon-mac.png" alt=""><span><small>Mac App Store</small><strong>Tyniy for Mac</strong></span></a>
       <a class="badge" href="https://apps.apple.com/app/id6747710470"><img src="assets/icon-iphone.png" alt=""><span><small>App Store</small><strong>Tyniy for iPhone &amp; iPad</strong></span></a>
+      <a class="badge" href="https://apps.apple.com/app/id6748950345?mt=12"><img src="assets/icon-mac.png" alt=""><span><small>Mac App Store</small><strong>Tyniy for Mac</strong></span></a>
     </div>
   </div>
 </section>
@@ -397,6 +558,27 @@ footer a:hover { color: var(--ink); }
   slider.addEventListener('keydown', e => {
     if (e.key === 'ArrowLeft') { set(value - 5); e.preventDefault(); }
     if (e.key === 'ArrowRight') { set(value + 5); e.preventDefault(); }
+  });
+})();
+
+// Gallery tabs: iPhone & iPad / Mac
+(function () {
+  const tabs = [...document.querySelectorAll('#gallery [role="tab"]')];
+  function select(tab) {
+    tabs.forEach(t => {
+      const on = t === tab;
+      t.setAttribute('aria-selected', on);
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+    });
+  }
+  tabs.forEach((tab, i) => {
+    tab.addEventListener('click', () => select(tab));
+    tab.addEventListener('keydown', e => {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      const next = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+      select(next); next.focus(); e.preventDefault();
+    });
   });
 })();
 </script>
